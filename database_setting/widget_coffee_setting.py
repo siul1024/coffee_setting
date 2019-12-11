@@ -8,21 +8,31 @@ class Ui_coffee(QWidget):
         super().__init__()
         self.DB = DBInitService()
         self.ui = uic.loadUi("database_setting/coffee.ui")
+        # 슬롯시그널
         self.ui.btn_init.clicked.connect(self.db_init_service)
         self.ui.btn_restore.clicked.connect(self.db_restore_service)
         self.ui.btn_backup.clicked.connect(self.db_backup_service)
         self.ui.show()
 
     def db_init_service(self):
-        self.DB.database_init_service()
-        QMessageBox.about(self, 'init', 'init')
+        res = self.DB.database_init_service()
+        if res is True:
+            QMessageBox.about(self, 'init', 'init')
+        else:
+            QMessageBox.about(self, 'init', 'Failed')
 
     def db_restore_service(self):
-        self.DB.data_restore('product')
-        self.DB.data_restore('sale')
-        QMessageBox.about(self, 'restore', 'restore')
+        a = self.DB.data_restore('product')
+        b = self.DB.data_restore('sale')
+        if (a & b) is True:
+            QMessageBox.about(self, 'restore', 'restore')
+        else:
+            QMessageBox.about(self, 'restore', 'Failed')
 
     def db_backup_service(self):
-        self.DB.data_backup('product')
-        self.DB.data_backup('sale')
-        QMessageBox.about(self, 'backup', 'backup')
+        a = self.DB.data_backup('product')
+        b = self.DB.data_backup('sale')
+        if (a & b) is True:
+            QMessageBox.about(self, 'backup', 'backup')
+        else:
+            QMessageBox.about(self, 'backup', 'Failed')
