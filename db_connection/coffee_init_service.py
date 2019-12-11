@@ -91,7 +91,7 @@ class DBInitService:
             cursor.close()
             conn.close()
 
-    def __data_backup(self, table_name):
+    def data_backup(self, table_name):
         filename = table_name + '.txt'
         print(filename)
         try:
@@ -115,7 +115,7 @@ class DBInitService:
                 cursor.close()
                 conn.close()
 
-    def __data_restore(self, table_name):
+    def data_restore(self, table_name):
         filename = table_name + '.txt'
         try:
             conn = ConnectionPool.get_instance().get_connection()
@@ -138,11 +138,3 @@ class DBInitService:
         self.__create_database()
         self.__create_table()
         self.__create_user()
-
-    def database_backup_service(self):
-        self.__data_backup(table_name='product')
-        self.__data_backup(table_name='sale')
-
-    def database_restore_service(self):
-        self.__data_restore(table_name='product')
-        self.__data_restore(table_name='sale')

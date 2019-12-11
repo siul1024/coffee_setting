@@ -14,13 +14,15 @@ class Ui_coffee(QWidget):
         self.ui.show()
 
     def db_init_service(self):
-        self.ui.btn_init.clicked.connect(self.DB.database_init_service)
+        self.DB.database_init_service()
         QMessageBox.about(self, 'init', 'init')
 
     def db_restore_service(self):
-        self.ui.btn_restore.clicked.connect(self.DB.database_restore_service)
+        self.DB.data_restore('product')
+        self.DB.data_restore('sale')
         QMessageBox.about(self, 'restore', 'restore')
 
     def db_backup_service(self):
-        self.ui.btn_backup.clicked.connect(self.DB.database_backup_service)
+        self.DB.data_backup('product')
+        self.DB.data_backup('sale')
         QMessageBox.about(self, 'backup', 'backup')
