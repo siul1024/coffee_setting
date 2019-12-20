@@ -8,6 +8,7 @@ class Ui_coffee(QWidget):
         super().__init__()
         self.DB = DBInitService()
         self.ui = uic.loadUi("database_setting/coffee.ui")
+        self.ui.setWindowTitle("DATABASE SETTING")
         # 슬롯시그널
         self.ui.btn_init.clicked.connect(self.db_init_service)
         self.ui.btn_restore.clicked.connect(self.db_restore_service)
